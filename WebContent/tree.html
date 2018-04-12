@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<link type="text/css" rel="stylesheet" href="js/themes/default/easyui.css">
+<link type="text/css" rel="stylesheet" href="js/themes/icon.css">
+
+
+<script type="text/javascript">
+	$(function(){
+		$("#tree").tree({
+			url:'/EasyUI/TreeDataServlet',
+			lines:true, /* 层级关系的虚线 */
+			dnd:true,/* 是否进行拖拽 */
+			checkbox:true,/* 复选框加载 */
+			animate:true,/* 动画 */
+			onClick:function(node){
+				
+				//判断是否是叶子节点 $("tree").tree("isLeaf",node.target) 返回布尔值
+				if($("tree").tree("isLeaf",node.target)){
+					//alert("窗口弹出")
+					$("#table").datagrid({
+						url:"datagird.json",
+						columns:[[
+									{"checkbox":true},//是否在每行之前显示复选框
+							        {field:'code',title:'Code',width:100},    //title是表格的表头 ,filed代表当前列要显示的数据在json的key
+							        {field:'name',title:'Name',width:100},    
+							        {field:'price',title:'Price',width:100,align:'right'},   
+							        {field:'cz',title:'操作',width:100,align:'right'}    
+							    ]],
+							    fitColumns:true,
+							    onLoadSuccess:function(){
+							    	console.info($(".cz")[0]);
+							    	$(".cz").linkbutton({
+							    		iconCls:"icon-search"
+							    	})
+							    }
+						
+					})
+				}else{
+					alert("窗口弹出")
+				}
+			}
+		})
+		
+	})
+	
+</script>
+</head>
+<body>
+	<ul id="tree"></ul><!-- 树必须放在ul中 -->
+	<table id="table"></table>
+</body>
+</html>

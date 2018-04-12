@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/mytable.js"></script>
+<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+<link type="text/css" rel="stylesheet" href="js/themes/default/easyui.css">
+<link type="text/css" rel="stylesheet" href="js/themes/icon.css">
+
+
+<script type="text/javascript">
+	/* $(function(){
+		$("#table").createTable();
+	}
+	) */
+	
+	
+	/* function show1() {
+		 $(function(){
+				$("#table").createTable();
+			}		
+	}   <input type="button" value="点击" onclick="show1()"> 暂时不能实现  原因未知*/
+	
+	
+	
+	/* 
+	$(function(){
+		$("#table").createTable2({
+			rows:8,
+			colums:6
+		});
+	}) */
+	
+	
+/* 	$(function(){
+		$("#table").createTable3({
+			rows:[
+			      {
+			    	  id:"1",
+					  name:"Rose",
+					  gender:"女"
+			      },
+			      {
+			    	  id:"2",
+					  name:"Jack",
+					  gender:"男"
+			      },
+			      {
+			    	  id:"3",
+					  name:"Mike",
+					  gender:"女"
+			      },
+			      {
+			    	  id:"4",
+					  name:"Jone",
+					  gender:"男"
+			      }
+			      
+			      
+			      ]
+		});
+		
+	})
+	 */
+	
+	 $(function(){
+		 $("#table").createTable4({
+			 colums:[
+			         	{title:"id"},
+			         	{title:"name"},
+			         	{title:"gender"}
+			         ],
+	 		url:"data.json",
+	 		type:"post"
+		 })
+		 
+	 })
+</script>
+
+<script type="text/javascript">
+$(function(){
+	$("#table2").datagrid({
+		url:"datagird.json",
+		columns:[[
+					{"checkbox":true},//是否在每行之前显示复选框
+			        {field:'code',title:'Code',width:100},    //title是表格的表头 ,filed代表当前列要显示的数据在json的key
+			        {field:'name',title:'Name',width:100},    
+			        {field:'price',title:'Price',width:100,align:'right'}    
+			    ]],
+			    fitColumns:true, //格式化
+				pagination:true,//分页
+				rownumbers:true, //行号
+				singleSelect:true, //设置单选
+				ctrlSelect:true,
+				striped:true, //设置斑马线
+				pageSize:20, //初始化页码
+				pageNumber:6,//当前页码
+
+				//pageList:[1,2,3] 分页情况
+				toolbar: [{
+					iconCls: 'icon-edit',
+					handler: function(){alert("编辑按钮")}
+			},'-',{
+			iconCls: 'icon-help',
+			handler: function(){alert('帮助按钮')}
+				
+	}],
+		pagePosition:"top"
+	})
+})
+</script>
+<!-- 小菜单  menu()中设置定位-->
+<script type="text/javascript">
+	$(function(){
+		document.oncontextmenu=function(){
+			return false;
+		}/* 拦截默认浏览器的菜单 */
+		
+		$("body").bind("contextmenu",function(e){
+			$("#menu").menu({
+				/* left:200,
+				top:200   设置在浏览器的绝对位置*/
+				left:e.pageX+5,
+				top:e.pageY/* 设置在浏览器的相对位置 */
+			}).show();
+		})   //设置作用范围
+		
+		/* $("#menu").menu({
+			left:200,
+			top:200
+		}).show();     */
+		
+	})
+	function dianji(){
+		alert("点击")
+	}
+</script>
+
+<script type="text/javascript">
+	$(function(){
+		$("#button").linkbutton({
+			iconCls:"icon-back"
+		})
+	})
+</script>
+<!-- 树结构 -->
+<script type="text/javascript">
+	$(function(){
+		$("#tree").tree({
+			url:'tree_data.json',
+			lines:true, /* 层级关系的虚线 */
+			dnd:true,/* 是否进行拖拽 */
+			checkbox:true,/* 复选框加载 */
+			animate:true/* 动画 */
+		})
+		
+	})
+	
+</script>
+
+
+
+</head> 
+<body>
+	<ul id="tree"></ul><!-- 树必须放在ul中 -->
+	
+	
+
+	<table id="table" border="1">  </table>
+		<br>
+		<a id="button">按钮</a>
+		<a class="easyui-linkbutton" data-options="'iconCls':'icon-back'">按钮</a>
+		<br>
+	<table id="table2"></table>
+
+	<div id="menu" class="easyui-menu" style="width: 100px;" data-options="onClick:dianji"><!-- 设置事件 -->
+		<div>新建</div>
+		<div data-options="'iconCls':'icon-search'">查看</div> <!-- 添加图标 -->
+		<div>排序
+			<div><!-- 如果添加层级，需要外套DIV -->
+				<div>类型</div>
+				<div>大小</div>
+				<div>时间</div>
+			</div>
+		</div>
+		<div class="menu-sep"><!-- 分割线 js内部定义的类 --></div>
+		<div>粘贴</div>
+		<div>刷新</div>
+	</div>
+	
+	
+	
+</body>
+</html>
