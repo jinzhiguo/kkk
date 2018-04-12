@@ -1,4 +1,4 @@
-package com.qf.servlet;
+﻿package com.qf.servlet;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,7 +50,6 @@ public class TreeDataServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
